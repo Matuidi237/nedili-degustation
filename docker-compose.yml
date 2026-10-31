@@ -1,0 +1,18 @@
+services:
+  nedili-degustation:
+    build: .
+    container_name: nedili-degustation
+    restart: unless-stopped
+    environment:
+      ADMIN_KEY: ${ADMIN_KEY:?Definir ADMIN_KEY dans .env}
+    volumes:
+      - nedili-data:/app/data
+    networks:
+      - webproxy
+
+volumes:
+  nedili-data:
+
+networks:
+  webproxy:
+    external: true

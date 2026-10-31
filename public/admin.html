@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Résultats NEDILI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin { max-width: 1040px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter-r); padding-block: 32px 64px; }
+    .admin__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding-bottom: 24px; }
+    .admin__head > div { display: grid; gap: 6px; }
+    .admin__head h1 { font-size: var(--fs-xl); }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn--sm { padding: 10px 16px; font-size: var(--fs-sm); text-decoration: none; display: inline-block; }
+    .btn--line { background: var(--bg); border: 1px solid var(--line); color: var(--text); }
+
+    .figures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--text); border-bottom: 1px solid var(--line); }
+    .figure { display: grid; gap: 2px; padding: 16px 16px 16px 0; }
+    .figure + .figure { padding-left: 16px; border-left: 1px solid var(--line); }
+    .figure b { font-size: var(--fs-xl); font-weight: 700; letter-spacing: -.02em; }
+    .figure span { font-size: var(--fs-xs); color: var(--muted); }
+
+    .section-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 40px 0 0; padding-bottom: 10px; border-bottom: 1px solid var(--text); font-size: var(--fs-sm); }
+    .section-title span { font-size: var(--fs-xs); font-weight: 500; color: var(--muted); }
+
+    .rank { list-style: none; margin: 0; padding: 0; }
+    .rank > li { border-bottom: 1px solid var(--line); }
+    .rank__row { display: grid; grid-template-columns: 30px minmax(0, 1fr) 160px 70px 56px; gap: 16px; align-items: center; padding: 14px 0; }
+    .rank__num { font-size: var(--fs-xs); font-weight: 600; color: var(--muted); }
+    .rank__name { font-weight: 600; }
+    .rank__meta { font-size: var(--fs-xs); color: var(--muted); }
+    .bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface); gap: 2px; }
+    .bar i { display: block; height: 100%; }
+    .rank__buy { font-size: var(--fs-sm); text-align: right; color: var(--muted); }
+    .rank__avg { font-size: var(--fs-lg); font-weight: 700; text-align: right; }
+    .rank__avg.is-empty { color: var(--muted); font-weight: 400; }
+    .rank details { padding: 0 0 14px 46px; font-size: var(--fs-sm); }
+    .rank summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--fs-xs); }
+    .rank ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+    .pill { display: inline-block; padding: 3px 8px; border-radius: 6px; background: var(--surface); font-size: var(--fs-xs); margin: 8px 4px 0 0; }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: var(--fs-xs); color: var(--muted); padding-top: 10px; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+    th, td { text-align: left; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { color: var(--muted); font-weight: 600; font-size: var(--fs-xs); }
+
+    .qr { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; padding-top: 20px; }
+    #qr { background: #FFFFFF; padding: 14px; border-radius: 12px; border: 1px solid var(--line); width: 228px; height: 228px; }
+    #qr img, #qr canvas { width: 200px !important; height: 200px !important; }
+    .qr__side { display: grid; gap: 12px; }
+
+    .login { max-width: 380px; margin: 16vh auto 0; padding-left: var(--gutter); padding-right: var(--gutter-r); display: grid; gap: 14px; }
+    .login h1 { font-size: var(--fs-xl); }
+
+    :root { --c-low: #F47A63; --c-mid: #E8C27A; }
+    .btn { border-radius: 999px; }
+
+    @media (max-width: 760px) {
+      .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .figure, .figure + .figure { padding: 14px 12px 14px 0; border-left: 0; }
+      .figure:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .rank__row { grid-template-columns: 30px minmax(0, 1fr) 56px; }
+      .rank__row .bar-cell, .rank__buy { display: none; }
+      .qr { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <form class="login" id="login" hidden>
+    <p class="kicker">NEDILI · Dégustation</p>
+    <h1>Résultats</h1>
+    <p class="sub">Saisissez la clé d'administration pour voir les notes.</p>
+    <div class="field">
+      <label for="key">Clé</label>
+      <input type="password" id="key" name="key" autocomplete="current-password">
+    </div>
+    <p class="form-msg" id="loginMsg"></p>
+    <button class="btn btn--primary btn--block">Voir les résultats</button>
+  </form>
+
+  <main class="admin" id="dash" hidden>
+    <div class="admin__head">
+      <div>
+        <p class="kicker">NEDILI · Dégustation</p>
+        <h1>Résultats</h1>
+        <p class="sub" id="updated"></p>
+      </div>
+      <div class="actions">
+        <a class="btn btn--line btn--sm" id="csv" href="#">Exporter en CSV</a>
+        <button class="btn btn--primary btn--sm" id="refresh" type="button">Actualiser</button>
+      </div>
+    </div>
+
+    <div class="figures" id="figures"></div>
+
+    <h2 class="section-title">Classement <span>par note moyenne</span></h2>
+    <ol class="rank" id="rank"></ol>
+    <div class="legend">
+      <span><i style="background:var(--c-low)"></i>Notes 1 et 2</span>
+      <span><i style="background:var(--c-mid)"></i>Note 3</span>
+      <span><i style="background:var(--accent)"></i>Notes 4 et 5</span>
+    </div>
+
+    <h2 class="section-title">Contacts <span id="contactCount"></span></h2>
+    <div class="table-wrap"><table id="contacts"></table></div>
+
+    <h2 class="section-title">Code QR <span>à imprimer pour le stand</span></h2>
+    <div class="qr">
+      <div id="qr"></div>
+      <div class="qr__side">
+        <div class="field">
+          <label for="qrUrl">Adresse de la page de dégustation</label>
+          <input id="qrUrl">
+        </div>
+        <div class="actions">
+          <button class="btn btn--line btn--sm" id="qrMake" type="button">Regénérer</button>
+          <button class="btn btn--primary btn--sm" id="qrDownload" type="button">Télécharger le PNG</button>
+        </div>
+        <p class="sub">Imprimez-le en 4 cm de côté au minimum. Une fois en ligne, remplacez l'adresse locale par celle du site.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    (() => {
+      const $ = (s) => document.querySelector(s);
+      const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      const fmt = (n) => n.toFixed(1).replace('.', ',');
+      let key = sessionStorage.getItem('nedili.key') || '';
+      let timer = null;
+
+      async function load() {
+        const res = await fetch(`/api/results?key=${encodeURIComponent(key)}`);
+        if (res.status === 401) { sessionStorage.removeItem('nedili.key'); $('#dash').hidden = true; $('#login').hidden = false; return false; }
+        render(await res.json());
+        return true;
+      }
+
+      function render(d) {
+        const nums = Object.fromEntries(d.products.map((p, i) => [p.id, String(i + 1).padStart(2, '0')]));
+        const avg = d.totals.ratings ? d.products.reduce((s, p) => s + (p.average || 0) * p.count, 0) / d.totals.ratings : 0;
+        const buyYes = d.products.reduce((s, p) => s + p.buy.oui, 0);
+        const buyAll = d.products.reduce((s, p) => s + p.buy.oui + p.buy.peutetre + p.buy.non, 0);
+        $('#figures').innerHTML = [
+          [d.totals.visitors, 'participants'],
+          [d.totals.ratings, 'notes reçues'],
+          [avg ? `${fmt(avg)}/5` : '-', 'note moyenne'],
+          [buyAll ? `${Math.round(100 * buyYes / buyAll)} %` : '-', 'achèteraient'],
+        ].map(([v, l]) => `<div class="figure"><b>${v}</b><span>${l}</span></div>`).join('');
+        $('#updated').textContent = `Mis à jour à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}, actualisation toutes les 20 secondes`;
+
+        const cats = Object.fromEntries(d.categories.map((c) => [c.id, c.label]));
+        const sorted = [...d.products].sort((a, b) => (b.average ?? -1) - (a.average ?? -1) || b.count - a.count);
+        $('#rank').innerHTML = sorted.map((p) => {
+          const [d1, d2, d3, d4, d5] = p.distribution;
+          const seg = (n, color) => n ? `<i style="flex:${n};background:${color}"></i>` : '';
+          const buyTotal = p.buy.oui + p.buy.peutetre + p.buy.non;
+          const tags = Object.entries(p.tags).sort((a, b) => b[1] - a[1]).map(([t, n]) => `<span class="pill">${esc(t)} · ${n}</span>`).join('');
+          const details = (tags || p.comments.length) ? `
+            <details>
+              <summary>${p.comments.length ? `${p.comments.length} commentaire${p.comments.length > 1 ? 's' : ''}` : 'Précisions'}</summary>
+              <div>${tags}</div>
+              ${p.comments.length ? `<ul>${p.comments.map((c) => `<li>${esc(c.comment)} <span class="rank__meta">${c.score}/5</span></li>`).join('')}</ul>` : ''}
+            </details>` : '';
+          return `
+            <li>
+              <div class="rank__row">
+                <span class="rank__num">${nums[p.id]}</span>
+                <div>
+                  <div class="rank__name">${esc(p.name)}</div>
+                  <div class="rank__meta">${esc(cats[p.category])} · ${p.count} note${p.count > 1 ? 's' : ''}</div>
+                </div>
+                <div class="bar-cell"><div class="bar">${seg(d1 + d2, 'var(--c-low)')}${seg(d3, 'var(--c-mid)')}${seg(d4 + d5, 'var(--accent)')}</div></div>
+                <span class="rank__buy">${buyTotal ? `${Math.round(100 * p.buy.oui / buyTotal)} % oui` : ''}</span>
+                <span class="rank__avg ${p.average ? '' : 'is-empty'}">${p.average ? fmt(p.average) : '-'}</span>
+              </div>
+              ${details}
+            </li>`;
+        }).join('');
+
+        $('#contactCount').textContent = `${d.contacts.length} au total`;
+        $('#contacts').innerHTML = d.contacts.length
+          ? '<tr><th>Date</th><th>Prénom</th><th>E-mail</th><th>WhatsApp</th></tr>' + d.contacts.map((c) =>
+              `<tr><td>${new Date(c.at).toLocaleString('fr-FR')}</td><td>${esc(c.name)}</td><td>${esc(c.email)}</td><td>${esc(c.phone)}</td></tr>`).join('')
+          : '<tr><td class="rank__meta">Aucun contact pour le moment.</td></tr>';
+      }
+
+      function makeQr() {
+        $('#qr').innerHTML = '';
+        new QRCode($('#qr'), { text: $('#qrUrl').value, width: 600, height: 600, colorDark: '#171A23', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M });
+      }
+
+      async function enter() {
+        if (!(await load())) return;
+        $('#login').hidden = true;
+        $('#dash').hidden = false;
+        $('#csv').href = `/api/export.csv?key=${encodeURIComponent(key)}`;
+        if (!$('#qrUrl').value) { $('#qrUrl').value = location.origin + '/'; makeQr(); }
+        clearInterval(timer);
+        timer = setInterval(load, 20000);
+      }
+
+      $('#login').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        key = e.target.key.value;
+        sessionStorage.setItem('nedili.key', key);
+        await enter();
+        if ($('#dash').hidden) $('#loginMsg').textContent = 'Clé incorrecte. Vérifiez la valeur de ADMIN_KEY.';
+      });
+      $('#refresh').addEventListener('click', load);
+      $('#qrMake').addEventListener('click', makeQr);
+      $('#qrDownload').addEventListener('click', () => {
+        const a = document.createElement('a');
+        a.download = 'qr-nedili-degustation.png';
+        a.href = $('#qr canvas').toDataURL('image/png');
+        a.click();
+      });
+
+      if (key) enter(); else $('#login').hidden = false;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Dégustation NEDILI</title>
+  <meta name="description" content="Notez les produits NEDILI que vous venez de goûter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Motifs des produits (écran de chargement et page de remerciement) : ananas, pot, bouteille, orange, citron, foléré, poivre, sauce, feuille -->
+  <svg width="0" height="0" class="sr-defs" aria-hidden="true">
+    <symbol id="m-ananas" viewBox="0 0 24 24"><path d="M12 8.5L9 2.5M12 8.5V1.5M12 8.5l3-6M12 8.5L7 4.8M12 8.5l5-3.7"/><ellipse cx="12" cy="15.2" rx="5.2" ry="6.6"/><path d="M8.6 11.2l6.8 6.8M7.3 14.6l4.6 4.6M11 9.1l5.4 5.4M15.4 11.2l-6.8 6.8M16.7 14.6l-4.6 4.6M13 9.1l-5.4 5.4"/></symbol>
+    <symbol id="m-pot" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="3.5" rx="1"/><path d="M6.5 6h11v13a2.5 2.5 0 0 1-2.5 2.5H9A2.5 2.5 0 0 1 6.5 19z"/><rect x="8.8" y="11" width="6.4" height="5" rx="1"/></symbol>
+    <symbol id="m-bouteille" viewBox="0 0 24 24"><path d="M10 2h4M10.5 2v4.5L8 9.5V20a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 16 20V9.5l-2.5-3V2"/><path d="M8 13h8M8 17.5h8"/></symbol>
+    <symbol id="m-orange" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6.8"/><path d="M12 5.2v13.6M5.2 12h13.6M7.2 7.2l9.6 9.6M16.8 7.2l-9.6 9.6"/></symbol>
+    <symbol id="m-citron" viewBox="0 0 24 24"><path d="M4.5 12c0-4.4 3.4-7 7.5-7s7.5 2.6 7.5 7-3.4 7-7.5 7-7.5-2.6-7.5-7zM4.5 12H2.8M19.5 12h1.7"/><path d="M8.5 9.5c1-1 2.2-1.4 3.5-1.4"/></symbol>
+    <symbol id="m-folere" viewBox="0 0 24 24"><g transform="rotate(0 12 12)"><ellipse cx="12" cy="6.6" rx="3.2" ry="4.4"/></g><g transform="rotate(72 12 12)"><ellipse cx="12" cy="6.6" rx="3.2" ry="4.4"/></g><g transform="rotate(144 12 12)"><ellipse cx="12" cy="6.6" rx="3.2" ry="4.4"/></g><g transform="rotate(216 12 12)"><ellipse cx="12" cy="6.6" rx="3.2" ry="4.4"/></g><g transform="rotate(288 12 12)"><ellipse cx="12" cy="6.6" rx="3.2" ry="4.4"/></g><path d="M12 12l3.6-3.6"/><circle cx="16" cy="8" r=".9"/></symbol>
+    <symbol id="m-poivre" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.2"/><circle cx="15.5" cy="15.8" r="3.2"/><circle cx="12" cy="8.6" r="3.2"/><path d="M11 7.8l.8.8M7 14.2l.8.8M14.5 15l.8.8"/></symbol>
+    <symbol id="m-goutte" viewBox="0 0 24 24"><path d="M12 2.8S5 10.8 5 15a7 7 0 0 0 14 0c0-4.2-7-12.2-7-12.2z"/><path d="M8.8 15.2a3.2 3.2 0 0 0 3.2 3.2"/></symbol>
+    <symbol id="m-feuille" viewBox="0 0 24 24"><path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14zM5 19l8.5-8.5"/></symbol>
+  </svg>
+  <!-- Chargement -->
+  <div class="splash" id="splash" role="status" aria-label="Chargement">
+    <div class="splash__motifs" aria-hidden="true">
+      <svg class="motif" style="--x:6%;--y:8%;--s:56px;--r:-14deg;--c:var(--m-yellow);--d:0s"><use href="#m-ananas"/></svg>
+      <svg class="motif" style="--x:78%;--y:11%;--s:46px;--r:10deg;--c:var(--m-amber);--d:.4s"><use href="#m-pot"/></svg>
+      <svg class="motif" style="--x:44%;--y:5%;--s:28px;--r:20deg;--c:var(--m-green);--d:.9s"><use href="#m-feuille"/></svg>
+      <svg class="motif" style="--x:22%;--y:24%;--s:34px;--r:0deg;--c:var(--m-orange);--d:1.3s"><use href="#m-orange"/></svg>
+      <svg class="motif" style="--x:66%;--y:25%;--s:36px;--r:-8deg;--c:var(--m-pink);--d:.7s"><use href="#m-folere"/></svg>
+      <svg class="motif" style="--x:8%;--y:66%;--s:52px;--r:9deg;--c:var(--m-pink);--d:1.1s"><use href="#m-bouteille"/></svg>
+      <svg class="motif" style="--x:80%;--y:63%;--s:42px;--r:-24deg;--c:var(--m-lemon);--d:.2s"><use href="#m-citron"/></svg>
+      <svg class="motif" style="--x:27%;--y:79%;--s:30px;--r:0deg;--c:var(--m-beige);--d:1.6s"><use href="#m-poivre"/></svg>
+      <svg class="motif" style="--x:63%;--y:78%;--s:32px;--r:12deg;--c:var(--m-amber);--d:.5s"><use href="#m-goutte"/></svg>
+    </div>
+    <div class="splash__inner">
+      <span class="splash__brand">NEDILI</span>
+      <p class="splash__title">Dégustation</p>
+      <div class="splash__faces" aria-hidden="true"><i>😕</i><i>🙂</i><i>😋</i><i>🤩</i></div>
+      <div class="splash__bar"><span></span></div>
+    </div>
+    <p class="splash__foot">Confitures · Sauces · Sirops</p>
+  </div>
+
+  <div class="app">
+
+    <!-- 1. Catégories -->
+    <main id="view-home" class="view">
+      <header class="head">
+        <div class="head__row">
+          <span class="brand">NEDILI</span>
+          <div class="ring" aria-live="polite">
+            <svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="ring__track"/><circle cx="18" cy="18" r="15" class="ring__bar" id="ringBar"/></svg>
+            <span id="ringText">0/0</span>
+          </div>
+        </div>
+        <h1>Qu'avez-vous goûté ?</h1>
+        <p class="sub">Choisissez une famille, puis le produit à noter.</p>
+      </header>
+      <div class="cats" id="cats"></div>
+    </main>
+
+    <!-- 2. Produits d'une catégorie -->
+    <main id="view-cat" class="view" hidden>
+      <nav class="topbar">
+        <a class="back-btn" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Catégories</a>
+        <span class="topbar__meta" id="catMeta"></span>
+      </nav>
+      <header class="head head--tight">
+        <h1 id="catTitle"></h1>
+        <p class="sub">Touchez le produit que vous avez goûté.</p>
+      </header>
+      <div class="prods" id="prods"></div>
+    </main>
+
+    <!-- 3. Notation d'un produit -->
+    <main id="view-prod" class="view" hidden>
+      <nav class="topbar">
+        <a class="back-btn" id="prodBack" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="prodBackLabel"></span></a>
+        <span class="topbar__meta" id="prodMeta"></span>
+      </nav>
+
+      <figure class="hero">
+        <img id="prodImg" alt="">
+      </figure>
+
+      <header class="head head--tight">
+        <h1 id="prodName"></h1>
+        <p class="sub" id="prodNote"></p>
+      </header>
+
+      <section class="card">
+        <h2>Votre avis</h2>
+        <div class="rate" id="rate" role="radiogroup" aria-label="Votre note"></div>
+      </section>
+
+      <div class="details" id="details" hidden>
+        <section class="card">
+          <h2>L'achèteriez-vous ?</h2>
+          <div class="segmented" id="buy" role="radiogroup" aria-label="L'achèteriez-vous ?">
+            <button type="button" role="radio" data-value="oui">Oui</button>
+            <button type="button" role="radio" data-value="peutetre">Peut-être</button>
+            <button type="button" role="radio" data-value="non">Non</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Ce qui vous a marqué <small>facultatif</small></h2>
+          <div class="tags" id="tags"></div>
+          <textarea id="comment" rows="2" maxlength="500" aria-label="Un commentaire" placeholder="Un mot sur ce produit ?"></textarea>
+        </section>
+
+        <button class="btn btn--dark btn--block" id="validate" type="button">Ajouter à mes notes</button>
+        <button class="back-link back-link--danger" id="unrate" type="button">Retirer ma note</button>
+      </div>
+
+      <a class="back-link" id="prodBackBottom" href="#">Revenir à la liste des produits</a>
+    </main>
+
+    <!-- Fin : récapitulatif et contact -->
+    <main id="view-done" class="view" hidden>
+      <nav class="topbar">
+        <a class="back-btn" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Catégories</a>
+      </nav>
+      <header class="head head--tight">
+        <h1>Mes notes</h1>
+        <p class="sub" id="doneSummary"></p>
+      </header>
+
+      <ul class="recap" id="recap"></ul>
+
+      <form class="panel" id="contactForm" novalidate>
+        <h2>Restons en contact</h2>
+        <p class="sub">Facultatif. Laissez vos coordonnées pour recevoir nos nouveautés et nos offres.</p>
+        <div class="field">
+          <label for="cName">Prénom</label>
+          <input id="cName" name="name" autocomplete="given-name" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="cContact">E-mail ou WhatsApp</label>
+          <input id="cContact" name="contact" autocomplete="email" maxlength="120" placeholder="vous@exemple.com ou +237 6…">
+        </div>
+        <label class="check" for="cConsent">
+          <input type="checkbox" id="cConsent" name="consent">
+          <span class="check__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4L18 8"/></svg></span>
+          <span>J'accepte de recevoir les offres et nouveautés NEDILI</span>
+        </label>
+        <p class="form-msg" id="contactMsg" role="status"></p>
+      </form>
+
+      <button class="btn btn--dark btn--block" id="submitAll" type="button">Envoyer mes notes</button>
+      <a class="back-link" id="addMore" href="#">Noter d'autres produits</a>
+    </main>
+
+    <!-- Remerciement -->
+    <main id="view-thanks" class="view view--thanks" hidden>
+      <div class="splash__motifs" aria-hidden="true">
+        <svg class="motif" style="--x:6%;--y:6%;--s:52px;--r:-14deg;--c:var(--m-yellow);--d:0s"><use href="#m-ananas"/></svg>
+        <svg class="motif" style="--x:80%;--y:9%;--s:42px;--r:10deg;--c:var(--m-amber);--d:.4s"><use href="#m-pot"/></svg>
+        <svg class="motif" style="--x:46%;--y:3%;--s:26px;--r:20deg;--c:var(--m-green);--d:.9s"><use href="#m-feuille"/></svg>
+        <svg class="motif" style="--x:8%;--y:72%;--s:48px;--r:9deg;--c:var(--m-pink);--d:1.1s"><use href="#m-bouteille"/></svg>
+        <svg class="motif" style="--x:82%;--y:68%;--s:40px;--r:-24deg;--c:var(--m-lemon);--d:.2s"><use href="#m-citron"/></svg>
+        <svg class="motif" style="--x:30%;--y:86%;--s:30px;--r:0deg;--c:var(--m-orange);--d:1.6s"><use href="#m-orange"/></svg>
+        <svg class="motif" style="--x:64%;--y:85%;--s:32px;--r:-8deg;--c:var(--m-pink);--d:.5s"><use href="#m-folere"/></svg>
+      </div>
+      <div class="thanks">
+        <span class="done-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5.5 12.5l4 4L18.5 8"/></svg>
+        </span>
+        <h1>Merci pour votre participation !</h1>
+        <p class="sub" id="thanksText"></p>
+        <div class="thanks__faces" id="thanksFaces" aria-hidden="true"></div>
+        <p class="thanks__sign">L'équipe NEDILI</p>
+        <a class="btn btn--ghost" href="#">Noter d'autres produits</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Barre de fin -->
+  <div class="bar" id="bar" hidden>
+    <div class="bar__inner">
+      <span class="bar__text" id="barText"></span>
+      <a class="btn btn--dark" href="#fin">Valider</a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "event": "Dégustation NEDILI",
+  "categories": [
+    { "id": "confitures", "image": "img/products/conf-ananas.jpg", "label": "Confitures", "title": "Confitures", "color": "#F4B740", "ink": "#4A3204" },
+    { "id": "sauces", "image": "img/products/sauce-poivre-blanc.webp", "label": "Sauces", "title": "Sauces", "color": "#B3A194", "ink": "#33271F" },
+    { "id": "sirops", "image": "img/products/sirop-folere.webp", "label": "Sirops", "title": "Sirops", "color": "#D9739A", "ink": "#4A0F26" }
+  ],
+  "tags": {
+    "confitures": ["Fruitée", "Bien sucrée", "Trop sucrée", "Belle texture", "Morceaux généreux", "Originale"],
+    "sauces": ["Bien relevée", "Trop piquante", "Équilibrée", "Trop acide", "Onctueuse", "Parfumée", "Originale"],
+    "sirops": ["Rafraîchissant", "Trop sucré", "Goût naturel", "Parfumé", "Bien dosé", "Original"]
+  },
+  "items": [
+    { "id": "conf-ananas", "image": "img/products/conf-ananas.jpg", "category": "confitures", "name": "Confiture à l'ananas", "note": "L'ananas, tout simplement" },
+    { "id": "conf-ananas-passion", "image": "img/products/conf-ananas-passion.webp", "category": "confitures", "name": "Ananas + passion", "note": "Ananas et fruit de la passion" },
+
+    { "id": "sauce-poivre-blanc", "image": "img/products/sauce-poivre-blanc.webp", "category": "sauces", "name": "Sauce au poivre blanc", "note": "Douce et parfumée" },
+    { "id": "sauce-vinaigrette", "image": "img/products/sauce-vinaigrette.webp", "category": "sauces", "name": "Vinaigrette", "note": "Pour vos salades et crudités" },
+
+    { "id": "sirop-orange", "image": "img/products/sirop-orange.webp", "category": "sirops", "name": "Sirop à l'orange", "note": "Le goût de l'orange" },
+    { "id": "sirop-citron", "image": "img/products/sirop-citron.webp", "category": "sirops", "name": "Sirop au citron", "note": "Vif et désaltérant" },
+    { "id": "sirop-folere", "image": "img/products/sirop-folere.webp", "category": "sirops", "name": "Sirop au foléré", "note": "Fleur d'hibiscus, note acidulée" }
+  ]
+}
