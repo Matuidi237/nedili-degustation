@@ -21,6 +21,7 @@
 
     { "id": "sauce-poivre-blanc", "image": "img/products/sauce-poivre-blanc.webp", "category": "sauces", "name": "Sauce au poivre blanc", "note": "Douce et parfumée" },
     { "id": "sauce-vinaigrette", "image": "img/products/sauce-vinaigrette.webp", "category": "sauces", "name": "Vinaigrette", "note": "Pour vos salades et crudités" },
+    { "id": "sauce-poivre-vert", "image": "img/products/sauce-poivre-vert.webp", "category": "sauces", "name": "Poivre vert en saumure", "note": "Grains entiers, frais et parfumés" },
 
     { "id": "sirop-orange", "image": "img/products/sirop-orange.webp", "category": "sirops", "name": "Sirop à l'orange", "note": "Le goût de l'orange" },
     { "id": "sirop-citron", "image": "img/products/sirop-citron.webp", "category": "sirops", "name": "Sirop au citron", "note": "Vif et désaltérant" },

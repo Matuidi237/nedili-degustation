@@ -35,7 +35,7 @@ FACE_W = 33
 X_BUY = X_FACES + 5 * FACE_W + 14
 BUY_W = 42
 BOX = 13                    # côté d'une case à cocher
-ROW_MIN, ROW_MAX = 49, 72   # hauteur d'une ligne produit
+ROW_MIN, ROW_MAX = 46, 72   # hauteur d'une ligne produit
 
 
 def fonts():
@@ -104,7 +104,7 @@ def header(c):
     top = H - M
     img = logo()
     iw, ih = img.getSize()
-    lw = 76
+    lw = 64
     lh = lw * ih / iw
     c.drawImage(img, M, top - lh, lw, lh, mask="auto")
 
@@ -119,7 +119,7 @@ def header(c):
     c.drawRightString(tx, top - 55, "Pour chaque produit goûté, cochez une case de note.")
     c.drawRightString(tx, top - 68, "Le reste est facultatif : quelques secondes suffisent.")
 
-    return top - lh - 14
+    return top - max(lh, 72) - 8
 
 
 def table_head(c, y):
@@ -186,7 +186,7 @@ def product(c, y, num, item, tags, row):
         c.drawString(x, ty, t)
         x += pdfmetrics.stringWidth(t, "UI", 7.5) + 11
 
-    cy = top - row + 5
+    cy = top - row + 4
     c.setFillGray(MUTED)
     c.drawString(X_NAME, cy, "Un mot :")
     dotted(c, X_NAME + 40, W - M, cy - 1)
@@ -198,9 +198,9 @@ def product(c, y, num, item, tags, row):
 
 
 def contact(c, y):
-    y -= 14
+    y -= 10
     pad = 12
-    h = 78
+    h = 68
     c.setStrokeGray(INK)
     c.setLineWidth(0.9)
     c.roundRect(M, y - h, W - 2 * M, h, 8)
@@ -212,7 +212,7 @@ def contact(c, y):
     c.setFont("UI", 8)
     c.drawString(x + 100, y - 18, "Facultatif. Pour recevoir nos nouveautés et nos offres.")
 
-    fy = y - 40
+    fy = y - 37
     mid = M + (W - 2 * M) * 0.38
     c.setFillGray(INK)
     c.setFont("UI", 8.5)
@@ -221,7 +221,7 @@ def contact(c, y):
     c.drawString(mid, fy, "E-mail ou WhatsApp")
     dotted(c, mid + 84, W - M - pad, fy - 1)
 
-    by = y - 64
+    by = y - 57
     c.setStrokeGray(INK)
     box(c, x, by - 3, 12)
     c.setFont("UI", 8.5)
