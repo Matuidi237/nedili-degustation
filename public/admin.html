@@ -210,7 +210,7 @@
 
       $('#login').addEventListener('submit', async (e) => {
         e.preventDefault();
-        key = e.target.key.value;
+        key = e.target.key.value.trim();
         sessionStorage.setItem('nedili.key', key);
         await enter();
         if ($('#dash').hidden) $('#loginMsg').textContent = 'Clé incorrecte. Vérifiez la valeur de ADMIN_KEY.';
