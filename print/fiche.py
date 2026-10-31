@@ -35,7 +35,7 @@ FACE_W = 33
 X_BUY = X_FACES + 5 * FACE_W + 14
 BUY_W = 42
 BOX = 13                    # côté d'une case à cocher
-ROW_MIN, ROW_MAX = 57, 72   # hauteur d'une ligne produit
+ROW_MIN, ROW_MAX = 49, 72   # hauteur d'une ligne produit
 
 
 def fonts():
@@ -104,14 +104,14 @@ def header(c):
     top = H - M
     img = logo()
     iw, ih = img.getSize()
-    lw = 92
+    lw = 76
     lh = lw * ih / iw
     c.drawImage(img, M, top - lh, lw, lh, mask="auto")
 
     tx = W - M
     c.setFillGray(MUTED)
     c.setFont("UI-Semi", 8)
-    c.drawRightString(tx, top - 12, "DÉGUSTATION · CONFITURES · SAUCES · SIROPS")
+    c.drawRightString(tx, top - 12, "DÉGUSTATION · CONFITURES · TARTINADES · SAUCES · SIROPS")
     c.setFillGray(INK)
     c.setFont("UI-Bold", 22)
     c.drawRightString(tx, top - 38, "Votre avis compte")
@@ -160,26 +160,23 @@ def product(c, y, num, item, tags, row):
     top = y
     # Numéro dans une pastille, comme sur le stand
     c.setFillGray(INK)
-    c.circle(X_NUM + 10, top - 15, 10, stroke=0, fill=1)
+    c.circle(X_NUM + 10, top - 11, 10, stroke=0, fill=1)
     c.setFillGray(1)
     c.setFont("UI-Bold", 8.5)
-    c.drawCentredString(X_NUM + 10, top - 18, f"{num:02d}")
+    c.drawCentredString(X_NUM + 10, top - 14, f"{num:02d}")
 
     c.setFillGray(INK)
     c.setFont("UI-Semi", 10.5)
-    c.drawString(X_NAME, top - 13, item["name"])
-    c.setFillGray(MUTED)
-    c.setFont("UI", 8)
-    c.drawString(X_NAME, top - 24, item.get("note", ""))
+    c.drawString(X_NAME, top - 15, item["name"])
 
     c.setStrokeGray(INK)
     for i in range(5):
-        box(c, X_FACES + i * FACE_W + (FACE_W - BOX) / 2, top - 22)
+        box(c, X_FACES + i * FACE_W + (FACE_W - BOX) / 2, top - 20)
     for i in range(3):
-        box(c, X_BUY + i * BUY_W + (BUY_W - BOX) / 2, top - 22)
+        box(c, X_BUY + i * BUY_W + (BUY_W - BOX) / 2, top - 20)
 
     # Précisions à entourer
-    ty = top - 37
+    ty = top - 30
     c.setFillGray(MUTED)
     c.setFont("UI", 7.5)
     c.drawString(X_NAME, ty, "Entourez :")
@@ -189,7 +186,7 @@ def product(c, y, num, item, tags, row):
         c.drawString(x, ty, t)
         x += pdfmetrics.stringWidth(t, "UI", 7.5) + 11
 
-    cy = top - row + 7
+    cy = top - row + 5
     c.setFillGray(MUTED)
     c.drawString(X_NAME, cy, "Un mot :")
     dotted(c, X_NAME + 40, W - M, cy - 1)
@@ -201,7 +198,7 @@ def product(c, y, num, item, tags, row):
 
 
 def contact(c, y):
-    y -= 20
+    y -= 14
     pad = 12
     h = 78
     c.setStrokeGray(INK)

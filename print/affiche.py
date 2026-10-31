@@ -114,7 +114,7 @@ def build(out):
     c.setStrokeColor(INK)
     c.setLineWidth(0.6)
     c.line(M, fy + 22, W - M, fy + 22)
-    text(c, M, fy, "Confitures, sauces, sirops", "UI-Semi", 11, INK)
+    text(c, M, fy, "Confitures, tartinades, sauces, sirops", "UI-Semi", 11, INK)
     text(c, M, fy - 16, "Pas de téléphone ? Demandez une fiche papier.", "UI", 9.5, MUTED)
 
     c.save()
