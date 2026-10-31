@@ -30,8 +30,6 @@ GOLD = HexColor("#C27C31")      # or du logo
 INK = HexColor("#14181F")
 MUTED = HexColor("#6A6F7A")
 
-URL_LABEL = "nedili.space-visuals.online"
-
 
 def fonts():
     pdfmetrics.registerFont(TTFont("UI", str(FONTS / "segoeui.ttf")))
@@ -118,9 +116,6 @@ def build(out):
     c.line(M, fy + 22, W - M, fy + 22)
     text(c, M, fy, "Confitures, sauces, sirops", "UI-Semi", 11, INK)
     text(c, M, fy - 16, "Pas de téléphone ? Demandez une fiche papier.", "UI", 9.5, MUTED)
-    c.setFont("UI-Semi", 11)
-    c.setFillColor(NAVY)
-    c.drawRightString(W - M, fy, URL_LABEL)
 
     c.save()
 
