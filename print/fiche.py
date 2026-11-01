@@ -36,6 +36,8 @@ X_BUY = X_FACES + 5 * FACE_W + 14
 BUY_W = 42
 BOX = 13                    # côté d'une case à cocher
 ROW_MIN, ROW_MAX = 46, 72   # hauteur d'une ligne produit
+ROW_PAGED = 58              # hauteur d'une ligne en recto verso, plus aérée
+CONTACT_H = 68
 
 
 def fonts():
@@ -200,7 +202,7 @@ def product(c, y, num, item, tags, row):
 def contact(c, y):
     y -= 10
     pad = 12
-    h = 68
+    h = CONTACT_H
     c.setStrokeGray(INK)
     c.setLineWidth(0.9)
     c.roundRect(M, y - h, W - 2 * M, h, 8)
@@ -229,7 +231,12 @@ def contact(c, y):
     return y - h
 
 
-def footer(c):
+def footer(c, last=True):
+    if not last:
+        c.setFillGray(MUTED)
+        c.setFont("UI-Semi", 9)
+        c.drawRightString(W - M, M, "Suite au verso")
+        return
     c.setFillGray(INK)
     c.setFont("UI-Semi", 9.5)
     c.drawCentredString(W / 2, M + 12, "Merci pour votre participation !")
@@ -245,30 +252,45 @@ def build(out):
 
     # Premier passage à blanc pour mesurer la place libre, puis on la répartit
     # entre les lignes produit (plus de place pour écrire, sans trou en bas).
+    # Si tout ne tient pas sur une page, la fiche passe en recto verso.
     spare = layout(canvas.Canvas(BytesIO(), pagesize=A4), data, tags, ROW_MIN) - (M + 40)
-    if spare < 0:
-        raise SystemExit(f"La fiche déborde de la page ({-spare:.0f} pt en trop), réduisez le contenu.")
-    row = min(ROW_MAX, ROW_MIN + spare / len(data["items"]))
+    paged = spare < 0
+    row = ROW_PAGED if paged else min(ROW_MAX, ROW_MIN + spare / len(data["items"]))
 
     c = canvas.Canvas(str(out), pagesize=A4)
     c.setTitle("Fiche de dégustation NEDILI")
     c.setAuthor("NEDILI")
-    layout(c, data, tags, row)
+    layout(c, data, tags, row, paged)
     footer(c)
     c.save()
 
 
-def layout(c, data, tags, row):
+def layout(c, data, tags, row, paged=False):
+    bottom = M + 40
+
+    def new_page():
+        footer(c, last=False)
+        c.showPage()
+        return table_head(c, H - M)
+
     y = header(c)
     y = table_head(c, y)
     num = 0
     for cat in data["categories"]:
+        # Une catégorie reste d'un seul tenant quand elle tient en entier sur la page suivante
+        count = sum(1 for item in data["items"] if item["category"] == cat["id"])
+        if paged and y - 21 - count * row < bottom:
+            y = new_page()
         y = category(c, y, cat)
         for item in data["items"]:
             if item["category"] != cat["id"]:
                 continue
+            if paged and y - row < bottom:
+                y = category(c, new_page(), {"label": cat["label"] + " (suite)"})
             num += 1
             y = product(c, y, num, item, tags.get(cat["id"], []), row)
+    if paged and y - 10 - CONTACT_H < bottom:
+        y = H - M
     return contact(c, y)
 
 
