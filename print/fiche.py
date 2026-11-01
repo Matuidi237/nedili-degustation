@@ -277,9 +277,11 @@ def layout(c, data, tags, row, paged=False):
     y = table_head(c, y)
     num = 0
     for cat in data["categories"]:
-        # Une catégorie reste d'un seul tenant quand elle tient en entier sur la page suivante
+        # On ne commence pas une catégorie en bas de page pour une ou deux lignes :
+        # elle passe alors à la page suivante, sinon elle continue au verso.
         count = sum(1 for item in data["items"] if item["category"] == cat["id"])
-        if paged and y - 21 - count * row < bottom:
+        fits = int((y - 21 - bottom) // row)
+        if paged and count > fits and fits < 3:
             y = new_page()
         y = category(c, y, cat)
         for item in data["items"]:
